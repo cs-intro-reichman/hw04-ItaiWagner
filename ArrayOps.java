@@ -1,11 +1,15 @@
 public class ArrayOps {
     public static void main(String[] args) {
-        // int missingIntArr[] = {1,2,3,4,0,0,0};
-        // int checkEqual[] = {0,1,2,3,4};
+        // int missingIntArr[] =  {2, 2, 3, 7, 8, 3, 2};
+        // int checkEqual[] =  {8, 2, 7, 7, 3};
         // System.out.println(findMissingInt(missingIntArr));
         // System.out.println(secondMaxValue(missingIntArr));
         // System.out.println(containsTheSameElements(missingIntArr, checkEqual));
         // System.out.println(isSorted(missingIntArr));
+        // int[] deduped = dedupArray(missingIntArr);
+        // for (int num : deduped) {
+        //     System.out.print(num);
+        // }
     }
 
     /*
@@ -50,38 +54,40 @@ public class ArrayOps {
         return secondLargest;
     }
 
+
     /*
      * This function takes two arrays of integers, and returns true if both arrays contain the same
      * numbers. The number of occurrences of each number, and their order, are not important.
      */
     public static boolean containsTheSameElements(int [] array1,int [] array2) {
-        // checking the max value of both arrays
-        int maxElement = Math.max(maxValue(array1), maxValue(array2));
-        // creating two frequencies arrays to count the numbers incident relying on the indexes
-        int freq1[] = new int[maxElement +1];
-        int freq2[] = new int[maxElement +1];
-        boolean isEqual = true;
+        // Deduping both arrays to compare them
+        int[] dedupedArray1 = dedupArray(array1);
+        int[] dedupedArray2 = dedupArray(array2);
 
 
-        for (int i = 0; i < array1.length; i++) {
-            if (freq1[array1[i]] == 0) {
-                freq1[array1[i]]++;
-            }
-        }
+        boolean areEqual = true;
 
-        for (int j = 0; j < array2.length; j++) {
-            if (freq2[array2[j]] == 0) {
-                freq2[array2[j]]++;
+        // iterate through both  deduped arrays to compare them
+        if (dedupedArray1.length == dedupedArray2.length) {
+            for (int i = 0; i < dedupedArray1.length; i++) {
+                int tmpNum = dedupedArray1[i];
+                boolean isNumExists = false;
+                for (int j = 0; j < dedupedArray2.length; j++) {
+                    if (tmpNum == dedupedArray2[j]) {
+                        isNumExists = true;
+                        break;
+                    }
+                }
+                if (isNumExists == false) {
+                    areEqual = false;
+                    break;
+                }
             }
+        } else {
+            areEqual = false;
         }
-        // Comparing the frequencies arrays
-        for (int i = 0; i < freq1.length; i++) {
-            if (freq1[i] != freq2[i]) {
-                isEqual = false;
-            }
+        return areEqual;
         }
-        return isEqual;
-    }
 
 
     /*
@@ -126,6 +132,7 @@ public class ArrayOps {
         return isSorted;
     }
 
+
     /*
      * This function gets an array and return the max value in it.
      * please note that this is an helper function
@@ -139,4 +146,40 @@ public class ArrayOps {
         return max;
     }
 
+
+    /*
+     * This function deduplicate a given int array. Note its a helper function.
+     */
+    public static int[] dedupArray(int[] array) {
+        int[] uniqueArray = new int[array.length];
+        int uniqueIndex = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            boolean isUnique = true;
+
+            // Checks if the current element is already in the uniqueArray
+            for (int j = 0; j < uniqueIndex; j++) {
+                if (array[i] == uniqueArray[j]) {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            // If the element is unique it adds it to the uniqueArray
+            if (isUnique) {
+                uniqueArray[uniqueIndex] = array[i];
+                uniqueIndex++;
+            }
+        }
+
+        // Create a new array with the correct size
+        int[] resultArray = new int[uniqueIndex];
+        
+        // coying the elements from uniqueArray to resultArray
+        for (int i = 0; i < uniqueIndex; i++) {
+            resultArray[i] = uniqueArray[i];
+        }
+
+        return resultArray;
+    }
 }

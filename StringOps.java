@@ -100,7 +100,6 @@ public class StringOps {
                 } else if (tmpChar == ' ') {
                     numOfWhiteSpaces++;
                     whiteSpaceIndex = i;
-                    System.out.println(whiteSpaceIndex);
                 }
             // Handling the second word and beyond
             } else {
