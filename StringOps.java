@@ -23,7 +23,7 @@ public class StringOps {
     ////////////////////////////////////////////////////////////
     public static void main(String[] args) {
         // System.out.println(capVowelsLowRest("One two tHRee world"));
-        // System.out.println(camelCase("Hello World i want to say that i love u"));
+        // System.out.println(camelCase(" tWo    wordS"));
         // int[] testArray = allIndexOf("hello world", 'l');
         // for (int i = 0; i < testArray.length; i++) {
         //     System.out.print(testArray[i]);
@@ -97,9 +97,11 @@ public class StringOps {
                 } else if (isUpperCase(tmpChar)) {
                     tmpChar = lower(tmpChar);
                     outStr += tmpChar;
-                } else if (tmpChar == ' ') {
+                } else if ((tmpChar == ' ') && (i != 0)) {
                     numOfWhiteSpaces++;
                     whiteSpaceIndex = i;
+                } else if ((tmpChar == ' ') && (i == 0)) {
+                    numOfWhiteSpaces = 0;
                 }
             // Handling the second word and beyond
             } else {

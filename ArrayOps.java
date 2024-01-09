@@ -1,15 +1,11 @@
 public class ArrayOps {
     public static void main(String[] args) {
-        // int missingIntArr[] =  {2, 2, 3, 7, 8, 3, 2};
+        // int missingIntArr[] =  {2, 2, 3, 7, 8, 3, 2, 8};
         // int checkEqual[] =  {8, 2, 7, 7, 3};
         // System.out.println(findMissingInt(missingIntArr));
         // System.out.println(secondMaxValue(missingIntArr));
         // System.out.println(containsTheSameElements(missingIntArr, checkEqual));
         // System.out.println(isSorted(missingIntArr));
-        // int[] deduped = dedupArray(missingIntArr);
-        // for (int num : deduped) {
-        //     System.out.print(num);
-        // }
     }
 
     /*
@@ -47,7 +43,7 @@ public class ArrayOps {
             if (tmpNum > largest) {
                 secondLargest = largest;
                 largest = tmpNum;
-            } else if ((tmpNum > secondLargest) && (tmpNum < largest)){
+            } else if ((tmpNum > secondLargest) && (tmpNum <= largest)){
                 secondLargest = tmpNum;
             }
         }
@@ -156,7 +152,6 @@ public class ArrayOps {
 
         for (int i = 0; i < array.length; i++) {
             boolean isUnique = true;
-
             // Checks if the current element is already in the uniqueArray
             for (int j = 0; j < uniqueIndex; j++) {
                 if (array[i] == uniqueArray[j]) {
@@ -164,7 +159,6 @@ public class ArrayOps {
                     break;
                 }
             }
-
             // If the element is unique it adds it to the uniqueArray
             if (isUnique) {
                 uniqueArray[uniqueIndex] = array[i];
